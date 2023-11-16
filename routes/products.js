@@ -4,23 +4,33 @@ const products = express.Router()
 
 
 products.get('/products', async (req, res) => {
-    const { page= 1, pageSize= 6 } = req.query
-
-
+    
     try {
         const products = await ProductModel.find()
-            .limit(pageSize)
-            .skip((page -1)* pageSize)
-
-        const totalProduct = await ProductModel.count()
-
         res.status(200)
             .send({
                 statusCode: 200,
-                currentPage: Number(page),
-                totalPages: Math.ceil(totalProduct/pageSize),
-                totalProduct,
                 products
+            })
+    } catch (error) {
+        res.status(500)
+         .send({
+            statusCode: 500,
+            message: "errore interno del server"
+         })
+    }
+})
+
+products.get('/products/:productId', async (req, res) => {
+    const { productId } = req.params
+
+
+    try {
+        const product = await ProductModel.findById(productId)
+        res.status(200)
+            .send({
+                statusCode: 200,
+                product
             })
     } catch (error) {
         res.status(500)
@@ -35,7 +45,7 @@ products.post('/products/create', async (req, res) => {
     const newProducts = new ProductModel({
         nome: req.body.nome,
         category: req.body.category,
-        prezzo: req.body.prezzo,
+        prezzo: Number(req.body.prezzo),
         cover1: req.body.cover1,
         cover2: req.body.cover2,
         cover3: req.body.cover3,

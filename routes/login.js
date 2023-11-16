@@ -30,7 +30,9 @@ login.post('/login', async (req, res) => {
         nome: utente.nome,
         cognome: utente.cognome,
         email: utente.email,
-        imgprofilo: utente.imgprofilo
+        imgprofilo: utente.imgprofilo,
+        indirizzo: utente.indirizzo,
+        telefono: utente.telefono
     }, process.env.JWT_SECRET, {expiresIn: '24h'})  
 
 

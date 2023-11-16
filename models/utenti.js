@@ -38,7 +38,8 @@ const UtentiSchema = new mongoose.Schema({
     },
 
     imgprofilo:{
-        type: String
+        type: String,
+        default: "http://www.pixelstalk.net/wp-content/uploads/2016/05/Download-Gaming-Wallpapers-Images.jpg"
     }
 }, {timestamps: true, strict: true})
 

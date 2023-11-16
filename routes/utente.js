@@ -86,7 +86,7 @@ utente.post('/utente/create', async (req, res) => {
     }
 })
 
-utente.patch('/utente/update/utentId', async (req, res) => {
+utente.patch('/utente/update/:utentId', async (req, res) => {
     const { utentId } = req.params;
 
     const utenteEsiste = await UtentiModel.findById(utentId)
@@ -117,7 +117,7 @@ utente.patch('/utente/update/utentId', async (req, res) => {
     }
 })
 
-utente.delete('/utente/delete/utentId', async (req, res) => {
+utente.delete('/utente/delete/:utentId', async (req, res) => {
     const { utentId } = req.params;
     try {
         const utn = UtentiModel.findByIdAndDelete(utentId)
