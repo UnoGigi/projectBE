@@ -40,9 +40,11 @@ utente.post('/utente/cloudUpload', cloudUpload.single('imgprofilo'), async (req,
 
 utente.get('/utente', verify, async (req, res) => {
     try {
+        const utente = await UtentiModel.find()
         res.status(200)
             .send({
-                statusCode: 200
+                statusCode: 200,
+                utente
             })
     } catch (error) {
         res.status(500)
@@ -50,6 +52,26 @@ utente.get('/utente', verify, async (req, res) => {
                 statusCode: 500,
                 message: "Errore del server"
             })
+    }
+})
+
+utente.get('/utente/:utentId', async (req, res) => {
+    const { utentId } = req.params
+
+
+    try {
+        const utente = await UtentiModel.findById(utentId)
+        res.status(200)
+            .send({
+                statusCode: 200,
+                utente
+            })
+    } catch (error) {
+        res.status(500)
+         .send({
+            statusCode: 500,
+            message: "errore interno del server"
+         })
     }
 })
 
@@ -66,7 +88,8 @@ utente.post('/utente/create', async (req, res) => {
         password: hashedPassword,
         indirizzo: req.body.indirizzo,
         telefono: Number(req.body.telefono),
-        imgprofilo: req.body.imgprofilo
+        imgprofilo: req.body.imgprofilo,
+        ruolo: req.body.ruolo
     })
 
     try {

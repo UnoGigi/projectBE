@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const UtentiSchema = new mongoose.Schema({
     username:{
         type: String,
-        required: true
+        default: "user"
     },
 
     nome:{
@@ -40,7 +40,12 @@ const UtentiSchema = new mongoose.Schema({
     imgprofilo:{
         type: String,
         default: "http://www.pixelstalk.net/wp-content/uploads/2016/05/Download-Gaming-Wallpapers-Images.jpg"
-    }
+    },
+
+    ruolo:{
+        type: String,
+        default: "user"
+    },
 }, {timestamps: true, strict: true})
 
 module.exports = mongoose.model('UtentiModel', UtentiSchema, 'utenti')
