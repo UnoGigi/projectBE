@@ -15,7 +15,7 @@ payment.post("/create-payment-intent", async (req, res) => {
     });
 
     res.send({
-        client_secret: paymentIntent.client_secret,
+        clientSecret: paymentIntent.client_secret,
       });
     });
 
